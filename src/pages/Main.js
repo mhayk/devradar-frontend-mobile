@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location'
+import { MaterialIcons } from '@expo/vector-icons'
 
 function Main({ navigation }) {
     const [currentRegion, setCurrentRegion] = useState(null);
@@ -33,35 +34,50 @@ function Main({ navigation }) {
         return null
 
     return (
-        <MapView initialRegion={currentRegion} style={styles.map}>
-            <Marker coordinate={{latitude: 51.4662185, longitude: -0.3446582}}>
-                <Image style={styles.avatar} source={{uri: 'https://avatars2.githubusercontent.com/u/1500873?s=460&v=4'}} />
+        <>
+            <MapView initialRegion={currentRegion} style={styles.map}>
+                <Marker coordinate={{latitude: 51.4662185, longitude: -0.3446582}}>
+                    <Image style={styles.avatar} source={{uri: 'https://avatars2.githubusercontent.com/u/1500873?s=460&v=4'}} />
 
-                <Callout onPress={() => {
-                    //navigation
-                    navigation.navigate('Profile', { github_username: 'mhayk'})
-                }}>
-                    <View style={styles.callout}>
-                        <Text style={styles.devName}>Mhayk Whandson</Text>
-                        <Text style={styles.devBio}>Passionate about JavaScript, ReactJS, React Native, NodeJS and the entire ecosystem around these technologies.</Text>
-                        <Text style={styles.devTechs}>ReactJS, React Native, Node.Js</Text>
-                    </View>
-                </Callout>
-            </Marker>
-            <Marker coordinate={{latitude: 51.475959, longitude: -0.1325432}}>
-                <Image style={styles.avatar} source={{uri: 'https://media-exp1.licdn.com/dms/image/C4E03AQHSFXLQ9sGEvA/profile-displayphoto-shrink_200_200/0?e=1585180800&v=beta&t=jMOPZEM3Lv6ZO_aGqvhv1UKv0oThSxBchILZFsaalTY'}} />
+                    <Callout onPress={() => {
+                        //navigation
+                        navigation.navigate('Profile', { github_username: 'mhayk'})
+                    }}>
+                        <View style={styles.callout}>
+                            <Text style={styles.devName}>Mhayk Whandson</Text>
+                            <Text style={styles.devBio}>Passionate about JavaScript, ReactJS, React Native, NodeJS and the entire ecosystem around these technologies.</Text>
+                            <Text style={styles.devTechs}>ReactJS, React Native, Node.Js</Text>
+                        </View>
+                    </Callout>
+                </Marker>
+                <Marker coordinate={{latitude: 51.475959, longitude: -0.1325432}}>
+                    <Image style={styles.avatar} source={{uri: 'https://media-exp1.licdn.com/dms/image/C4E03AQHSFXLQ9sGEvA/profile-displayphoto-shrink_200_200/0?e=1585180800&v=beta&t=jMOPZEM3Lv6ZO_aGqvhv1UKv0oThSxBchILZFsaalTY'}} />
 
-                <Callout onPress={() => {
-                    // navigation
-                }}>
-                    <View style={styles.callout}>
-                        <Text style={styles.devName}>Alberto Iglesias</Text>
-                        <Text style={styles.devBio}>Lindo, metrosexual, adora jogar volley, pagando faço tudo!</Text>
-                        <Text style={styles.devTechs}>C#,.Net Framework e muito mais.</Text>
-                    </View>
-                </Callout>
-            </Marker>
-        </MapView>
+                    <Callout onPress={() => {
+                        // navigation
+                    }}>
+                        <View style={styles.callout}>
+                            <Text style={styles.devName}>Alberto Iglesias</Text>
+                            <Text style={styles.devBio}>Lindo, metrosexual, adora jogar volley, pagando faço tudo!</Text>
+                            <Text style={styles.devTechs}>C#,.Net Framework e muito mais.</Text>
+                        </View>
+                    </Callout>
+                </Marker>
+            </MapView>
+            <View style={styles.searchForm}>
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search Dev by techs ..."
+                    placeholderTextColor="#999"
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                />
+
+                <TouchableOpacity onPress={() => {}} style={styles.loadButton}>
+                    <MaterialIcons name="my-location" size={20} color="#FFF" />
+                </TouchableOpacity>
+            </View>
+        </>
     )
 }
 
@@ -94,6 +110,42 @@ const styles = StyleSheet.create({
 
     devTechs: {
         marginTop: 5
+    },
+
+    searchForm: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+        right: 20,
+        zIndex: 5,
+        flexDirection: 'row',
+    },
+
+    searchInput: {
+        flex: 1,
+        height: 50,
+        backgroundColor: '#FFF',
+        color: '#333',
+        borderRadius: 25,
+        paddingHorizontal: 20,
+        fontSize: 16,
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowOffset: {
+            width: 4,
+            height: 4
+        },
+        elevation: 2
+    },
+
+    loadButton: {
+        width: 50,
+        height: 50,
+        backgroundColor: '#8e4dff',
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 15
     }
 
 })

@@ -9,3 +9,5 @@ $ yarn add react-navigation-stack
 $ expo install react-native-maps
 
 $ expo install expo-location
+
+$ expo install react-native-webview

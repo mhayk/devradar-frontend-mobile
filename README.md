@@ -7,3 +7,5 @@ $ yarn add @react-native-community/masked-view
 $ yarn add react-navigation-stack
 
 $ expo install react-native-maps
+
+$ expo install expo-location
